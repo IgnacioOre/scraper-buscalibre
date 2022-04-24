@@ -1,7 +1,7 @@
 # scraper-buscalibre
-Simple scraping de libros en Buscalibre con Python y Beautiful Soup.
+Simple scraping de libros en Buscalibre con Python y Beautiful Soup. A partir de una URL de Buscalibre.cl, extrae título, autor y precio de todos los libros para esa sección.
 
-## Forma de uso
+## Ejecución
 ```
 py buscalibre.py [URL]
 ```
