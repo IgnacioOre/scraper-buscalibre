@@ -1,3 +1,4 @@
+import sys
 import requests
 import mysql.connector
 from bs4 import BeautifulSoup
@@ -9,19 +10,19 @@ mydb = mysql.connector.connect(
   database="buscalibre"
 )
 
-
-URL = "https://www.buscalibre.cl/libros-envio-express-chile_t.html"
-page = requests.get(URL)
-
 mycursor = mydb.cursor()
+num = 1
+URL = sys.argv[1]
 
 
-
-for num in range(1, 201):
-	URL = "https://www.buscalibre.cl/libros-envio-express-chile_t.html?page="
-	page = requests.get(URL+str(num))
+while(True):
+	pageNum = "?page=" + str(num)
+	num += 1
+	page = requests.get(URL+pageNum)
 	soup = BeautifulSoup(page.content, "html.parser")
 	results = soup.find_all("div", class_="producto")
+	if results == []:
+		break
 	for libro in results:
 		titulo = libro.find("div", class_="nombre")
 		precio = libro.find("h3", class_="precio-ahora")
